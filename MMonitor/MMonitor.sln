@@ -5,6 +5,18 @@ VisualStudioVersion = 15.0.26730.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MMonitorLib", "MMonitorLib\MMonitorLib.csproj", "{8E6F5C53-18E8-4406-8081-7AC8BAE4A165}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "About", "About", "{DB0210D6-1B53-4624-B45E-78A479578877}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{9EAC8A82-1FC7-41D6-8237-75DFE7A0ED66}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientDesktopApp", "ClientDesktopApp\ClientDesktopApp.csproj", "{704BE02E-DBBE-430F-AFB2-8197E3E738FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MMonitorWebApp", "MMonitorWebApp\MMonitorWebApp.csproj", "{1D539D26-878A-44E5-A2EF-04F418EABA5C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CollectorService", "CollectorService\CollectorService.csproj", "{561FB27A-C7B2-4F24-99E5-D0398127F3C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MachineLearning", "MachineLearning\MachineLearning.csproj", "{9864F8BA-DF5F-4A82-841A-05431A0588FF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +27,22 @@ Global
 		{8E6F5C53-18E8-4406-8081-7AC8BAE4A165}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E6F5C53-18E8-4406-8081-7AC8BAE4A165}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E6F5C53-18E8-4406-8081-7AC8BAE4A165}.Release|Any CPU.Build.0 = Release|Any CPU
+		{704BE02E-DBBE-430F-AFB2-8197E3E738FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{704BE02E-DBBE-430F-AFB2-8197E3E738FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{704BE02E-DBBE-430F-AFB2-8197E3E738FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{704BE02E-DBBE-430F-AFB2-8197E3E738FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D539D26-878A-44E5-A2EF-04F418EABA5C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D539D26-878A-44E5-A2EF-04F418EABA5C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D539D26-878A-44E5-A2EF-04F418EABA5C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D539D26-878A-44E5-A2EF-04F418EABA5C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{561FB27A-C7B2-4F24-99E5-D0398127F3C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{561FB27A-C7B2-4F24-99E5-D0398127F3C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{561FB27A-C7B2-4F24-99E5-D0398127F3C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{561FB27A-C7B2-4F24-99E5-D0398127F3C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9864F8BA-DF5F-4A82-841A-05431A0588FF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9864F8BA-DF5F-4A82-841A-05431A0588FF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9864F8BA-DF5F-4A82-841A-05431A0588FF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9864F8BA-DF5F-4A82-841A-05431A0588FF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
