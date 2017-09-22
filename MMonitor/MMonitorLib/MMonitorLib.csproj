@@ -30,7 +30,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -41,15 +48,47 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\AbstractPublication.cs" />
+    <Compile Include="Entities\Cluster.cs" />
+    <Compile Include="Entities\NewsPage.cs" />
     <Compile Include="Entities\PageParsingRule.cs" />
+    <Compile Include="Entities\RssPage.cs" />
     <Compile Include="Entities\TheComment.cs" />
     <Compile Include="Entities\ThePublication.cs" />
     <Compile Include="Entities\TheSource.cs" />
-    <Compile Include="Entities\User.cs" />
     <Compile Include="Enums\Evaluation.cs" />
     <Compile Include="Enums\Langs.cs" />
+    <Compile Include="Enums\MediaAudienceType.cs" />
     <Compile Include="Enums\TheSourceType.cs" />
+    <Compile Include="Migrations\201709221617525_InitialCreate.cs" />
+    <Compile Include="Migrations\201709221617525_InitialCreate.Designer.cs">
+      <DependentUpon>201709221617525_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709222012076_added_index_for_url_hash.cs" />
+    <Compile Include="Migrations\201709222012076_added_index_for_url_hash.Designer.cs">
+      <DependentUpon>201709222012076_added_index_for_url_hash.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709222018002_added_index_for_url_hash1.cs" />
+    <Compile Include="Migrations\201709222018002_added_index_for_url_hash1.Designer.cs">
+      <DependentUpon>201709222018002_added_index_for_url_hash1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="MMonitorContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201709221617525_InitialCreate.resx">
+      <DependentUpon>201709221617525_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709222012076_added_index_for_url_hash.resx">
+      <DependentUpon>201709222012076_added_index_for_url_hash.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709222018002_added_index_for_url_hash1.resx">
+      <DependentUpon>201709222018002_added_index_for_url_hash1.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

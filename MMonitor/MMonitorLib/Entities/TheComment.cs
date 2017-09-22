@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,13 +8,15 @@ using System.Threading.Tasks;
 namespace MMonitorLib.Entities
 {
     /// <summary>
-    /// Комментарий к посту или статье.
+    /// Comment to post or article.
     /// </summary>
+    [Table("TheComments")]
     public class TheComment : AbstractPublication
     {
         /// <summary>
-        /// Публикация, к которой относится комментарий (может быть и комментарием).
+        /// Full publication or a comment.
         /// </summary>
-        public AbstractPublication Publication { get; set; }
+        public AbstractPublication AbstractPublication { get; set; }
+        public long AbstractPublicationId { get; set; }
     }
 }

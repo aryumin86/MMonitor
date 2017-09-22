@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,46 +8,76 @@ using System.Threading.Tasks;
 namespace MMonitorLib.Entities
 {
     /// <summary>
-    /// Правило парсинга страницы.
+    /// Rule of page parsing.
     /// </summary>
+    [Table("PageParsingRules")]
     public class PageParsingRule
     {
         public int Id { get; set; }
 
         /// <summary>
-        /// Может ли быть несколько публикаций,
-        /// удовлетворяющих этому правилу парсинга, на странице.
+        /// XPATH rule for content of publication.
         /// </summary>
-        public bool AllowMuliplyPublicationsOnPage { get; set; }
+        public string ContentXPath { get; set; }
 
         /// <summary>
-        /// Дата создания правила.
+        /// XPATH rule for pub date of publication.
+        /// </summary>
+        public string PubDateXPath { get; set; }
+
+        /// <summary>
+        ///  XPATH rule for author of publication.
+        /// </summary>
+        public string AuthorXPath { get; set; }
+
+        /// <summary>
+        /// Rule creation date.
         /// </summary>
         public DateTime RuleCreationDate { get; set; }
 
         /// <summary>
-        /// Регулярное выражение, которому должен соответствовать URL.
+        /// Regex for URL - only pages with urls match this regex are valid for this rule.
         /// </summary>
-        public string UrlRegex { get; set; }
+        public string UrlRegex { get; set; }        
 
         /// <summary>
-        /// Заголовок должен соответствовать этому регулярному выражению.
+        /// Regex for title - only pages with title match this regex are valid for this rule.
         /// </summary>
         public string TitleRegex { get; set; }
 
         /// <summary>
-        /// Автор создания этого правила.
+        /// User's Id who created this rule.
         /// </summary>
-        public User Author { get; set; }
+        public string AuthorId { get; set; }
 
         /// <summary>
-        /// Средняя оценка правила пользователями.
+        /// Average evaluation mark for this rule
         /// </summary>
-        public double AverageEvaluation { get; set; }
+        public double? AverageRuleEvaluation { get; set; }
 
         /// <summary>
-        /// Правило отклонено пользователем на клиентском приложении.
+        /// Rule was rejected by user in client app.
         /// </summary>
-        public bool RejectedByUser { get; set; }
+        public bool? RejectedByUser { get; set; }
+
+        /// <summary>
+        /// Regex for deliting parts of content of publication.
+        /// </summary>
+        public string EraseContentPartsRegex;
+
+        /// <summary>
+        /// Regex for deliting parts of title content of publication.
+        /// </summary>
+        public string EraseTitlePartsRegex;
+
+        /// <summary>
+        /// Regex for deliting parts of author content of publication.
+        /// </summary>
+        public string EraseAuthorPartsRegex;
+
+        /// <summary>
+        /// Regex for deliting parts of publication date content of publication.
+        /// </summary>
+        public string ErasePubDatePartsRegex;
     }
 }

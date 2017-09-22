@@ -7,24 +7,24 @@ using System.Threading.Tasks;
 namespace MMonitorLib.Enums
 {
     /// <summary>
-    /// Тип источника.
+    /// Source type.
     /// </summary>
     public enum TheSourceType
     {
         /// <summary>
-        /// СМИ.
+        /// Mass Media.
         /// </summary>
         MASS_MEDIA = 1,
         /// <summary>
-        /// Социальная сеть.
+        /// Social network.
         /// </summary>
         SOCIAL_NETWORK = 2,
         /// <summary>
-        /// Форум.
+        /// Forum.
         /// </summary>
         FORUM = 3,
         /// <summary>
-        /// Блог.
+        /// Blog.
         /// </summary>
         BLOG = 4
     }

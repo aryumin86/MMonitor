@@ -4,16 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MMonitorLib.Enums
+namespace MachineLearning
 {
     /// <summary>
-    /// Languages.
+    /// To identify a language of text class.
     /// </summary>
-    public enum Langs
+    public class LanguageIdentifier
     {
-        UNDEFINED = 0,
-        RUSSIAN = 1,
-        ENGLISH = 2, 
-        DEUTSCH = 3
     }
 }

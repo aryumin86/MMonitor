@@ -1,0 +1,9 @@
+Console app for uploading sources (objects of class TheSource) into MMonitor database.
+
+File should contain 3 columns (separated by tabs) - first is url of the source, second is a Language (textual 
+key of Langs enum in MMonitorLib), third is a TheSourceType (enum from the same lib).
+
+If the second colunt is empty the app tries to identify the language. (Not done)
+
+If there source is already in database it won't be added. Source with http protocol and the source with https are the same
+for database.

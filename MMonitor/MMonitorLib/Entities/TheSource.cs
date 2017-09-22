@@ -1,6 +1,8 @@
 ﻿using MMonitorLib.Enums;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,50 +10,90 @@ using System.Threading.Tasks;
 namespace MMonitorLib.Entities
 {
     /// <summary>
-    /// Источник контента. (СМИ, СМ).
+    /// The source (Mass media or Social media).
     /// </summary>
+    [Table("TheSources")]
     public class TheSource
     {
         public int Id { get; set; }
 
         /// <summary>
-        /// Название источника.
+        /// Source title.
         /// </summary>
         public string Title { get; set; }
 
         /// <summary>
-        /// Описание источника.
+        /// Main page of source.
+        /// </summary>        
+        public string Url { get; set; }
+
+        /// <summary>
+        /// Hash of url.
+        /// </summary>
+        [Index]
+        [MaxLength(32)]
+        public string UrlHash { get; set; }
+
+        /// <summary>
+        /// Source description.
         /// </summary>
         public string Description { get; set; }
 
         /// <summary>
-        /// Тип источника.
+        /// Source type.
         /// </summary>
-        public TheSourceType TheSourceType { get; set; } 
+        public TheSourceType TheSourceType { get; set; }
 
         /// <summary>
-        /// Кодировка источника.
+        /// Type of Media Audience.
+        /// </summary>
+        public MediaAudienceType MediaAudienceType { get; set; }
+
+        /// <summary>
+        /// Source encoding.
         /// </summary>
         public string Enc { get; set; }
 
         /// <summary>
-        /// Язык источника.
+        /// Source language.
         /// </summary>
         public Langs Lang { get; set; }
 
         /// <summary>
-        /// Правила парсинга источника.
+        /// Source parsing rules.
         /// </summary>
-        public IEnumerable<PageParsingRule> Rules;
+        public ICollection<PageParsingRule> PageParsingRules { get; set; }
 
         /// <summary>
-        /// Один для всех правил источника UserAgent. 
+        /// Source UserAgent. 
         /// </summary>
         public string UserAgent { get; set; }
 
         /// <summary>
-        /// Таймаут при обращении к источнику.
+        /// Timeout of request to the source in ms.
         /// </summary>
         public int RequestTimeOut { get; set; }
+
+        /// <summary>
+        /// Source RSS pages.
+        /// </summary>
+        public ICollection<RssPage> RssPages { get; set; }
+
+        /// <summary>
+        /// Pages to parse for new publications.
+        /// </summary>
+        public ICollection<NewsPage> NewsPages { get; set; }
+
+        /// <summary>
+        /// Last time there was an attempt to update 
+        /// the rules of the source AUTOMATICALLY.
+        /// </summary>
+        public DateTime? LastTimeAutamaticallRulesUpdatetry { get; set; }
+
+        /// <summary>
+        /// Was last attempt of updating the rules success
+        /// (if yes than true, no - false, null - were not attempts at all).
+        /// </summary>
+        public bool? AutomaticalRulesUpdateWasSuccess { get; set; }
     }
 }

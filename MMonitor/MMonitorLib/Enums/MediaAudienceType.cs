@@ -7,15 +7,13 @@ using System.Threading.Tasks;
 namespace MMonitorLib.Enums
 {
     /// <summary>
-    /// Evaluation of rule or other things.
+    /// Media type.
     /// </summary>
-    public enum Evaluation
+    public enum MediaAudienceType
     {
-        UNDEFINED = 0,
-        VERY_BAD = 1,
-        BAD = 2, 
-        NORMAL = 3,
-        GOOD = 4,
-        VERY_GOOD = 5
+        UNDEFIENED = 0,
+        REGIONAL = 1,
+        FEDERAL = 2,
+        INTERNATIONAL = 3
     }
 }

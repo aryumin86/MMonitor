@@ -8,10 +8,15 @@ using System.Threading.Tasks;
 namespace MMonitorLib.Entities
 {
     /// <summary>
-    /// Publication in mass or social media (not a comment, full post or article).
+    /// Page with RSS.
     /// </summary>
-    [Table("ThePublications")]
-    public class ThePublication : AbstractPublication
+    [Table("RssPages")]
+    public class RssPage
     {
+        public int Id { get; set; }
+        public string Url { get; set; }
+
+        public TheSource TheSourse { get; set; }
+        public int TheSourceId { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,20 +8,16 @@ using System.Threading.Tasks;
 namespace MMonitorLib.Entities
 {
     /// <summary>
-    /// Пользователь приложения.
+    /// Publication cluster.
     /// </summary>
-    public class User
+    [Table("Clusters")]
+    public class Cluster
     {
         public int Id { get; set; }
 
         /// <summary>
-        /// Имя.
+        /// Publications in cluster.
         /// </summary>
-        public string FirstName { get; set; }
-
-        /// <summary>
-        /// Фамилия.
-        /// </summary>
-        public string LastName { get; set; }
+        public ICollection<AbstractPublication> Publications;
     }
 }

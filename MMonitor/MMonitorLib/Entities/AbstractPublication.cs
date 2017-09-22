@@ -8,63 +8,77 @@ using System.Threading.Tasks;
 namespace MMonitorLib.Entities
 {
     /// <summary>
-    /// Абстрактный класс публикации (поста, статьи в сми).
+    /// Publication (Article in Mass Media, Post in Social Media, Comment to post/article/comment).
     /// </summary>
     public abstract class AbstractPublication
     {
-        /// <summary>
-        /// Id публикации
-        /// </summary>
         public long Id { get; set; }
 
         /// <summary>
-        /// Адрес публикации.
+        /// Publication address.
         /// </summary>
         public string Url { get; set; }
 
         /// <summary>
-        /// Заголовок публикации.
+        /// Shortened URL of publication (for search in DB and so on)
+        /// </summary>
+        public string UrlShorted { get; set; }
+
+        /// <summary>
+        /// Publication Title.
         /// </summary>
         public string Title { get; set; }
 
         /// <summary>
-        /// Содержание публикации.
+        /// Publication content.
         /// </summary>
         public string Content { get; set; }
 
         /// <summary>
-        /// Дата и время публикации.
+        /// Publicationwas published at.
         /// </summary>
         public DateTime PubDate { get; set; }
 
         /// <summary>
-        /// Источник публикации.
+        /// Source of publication.
         /// </summary>
         public TheSource Source { get; set; }
+        public int SourceId { get; set; }
 
         /// <summary>
-        /// Хеш урла.
+        /// Url MD5 hash.
         /// </summary>
         public string UrlHash { get; set; }
 
         /// <summary>
-        /// Хеш заголовка.
+        /// Title MD5 hash.
         /// </summary>
         public string TitleHash { get; set; }
 
         /// <summary>
-        /// Хеш контента.
+        /// Content MD5 hash.
         /// </summary>
         public string ContentHash { get; set; }
 
         /// <summary>
-        /// Список публикаций плагиатов - очень похожих или полных копий.
+        /// If this publication is plagiat - this is a main publication.
         /// </summary>
-        public List<AbstractPublication> Plagiats;
+        public AbstractPublication MainArticle { get; set; }
 
         /// <summary>
-        /// Язык публикации.
+        /// Article data was taken from RSS only.
         /// </summary>
-        public Langs Lang { get; set; }
+        public bool FromRSS { get; set; }
+
+        /// <summary>
+        /// Comments.
+        /// </summary>
+        public ICollection<TheComment> TheComments { get; set; }
+
+        /// <summary>
+        /// Cluster of publication.
+        /// </summary>
+        public Cluster Cluster { get; set; }
+        public int? ClusterId { get; set; }
     }
 }
