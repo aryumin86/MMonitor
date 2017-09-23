@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Entities\AbstractPublication.cs" />
     <Compile Include="Entities\Cluster.cs" />
+    <Compile Include="Entities\Country.cs" />
     <Compile Include="Entities\NewsPage.cs" />
     <Compile Include="Entities\PageParsingRule.cs" />
     <Compile Include="Entities\RssPage.cs" />
@@ -71,6 +72,14 @@
     <Compile Include="Migrations\201709222018002_added_index_for_url_hash1.Designer.cs">
       <DependentUpon>201709222018002_added_index_for_url_hash1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709230721076_added_index_for_url_hash2.cs" />
+    <Compile Include="Migrations\201709230721076_added_index_for_url_hash2.Designer.cs">
+      <DependentUpon>201709230721076_added_index_for_url_hash2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201709231406174_added_some_fields_to_source.cs" />
+    <Compile Include="Migrations\201709231406174_added_some_fields_to_source.Designer.cs">
+      <DependentUpon>201709231406174_added_some_fields_to_source.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MMonitorContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -88,6 +97,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709222018002_added_index_for_url_hash1.resx">
       <DependentUpon>201709222018002_added_index_for_url_hash1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709230721076_added_index_for_url_hash2.resx">
+      <DependentUpon>201709230721076_added_index_for_url_hash2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709231406174_added_some_fields_to_source.resx">
+      <DependentUpon>201709231406174_added_some_fields_to_source.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

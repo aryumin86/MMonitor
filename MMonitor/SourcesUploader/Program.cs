@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
+using System.Text.RegularExpressions;
 
 namespace SourcesUploader
 {
@@ -29,50 +30,58 @@ namespace SourcesUploader
                 var lines =  File.ReadAllLines(file);
 
                 TheSource s;
-                string url = string.Empty;
                 Uri u;
-                Langs lang = Langs.UNDEFINED;
+                string url = string.Empty;
                 string sourceType = string.Empty;
-                
+                string l = string.Empty;
 
                 foreach(var line in lines)
-                {                    
+                {
                     string[] parts = line.Split('\t').Select(p => p.Trim()).ToArray();
-                    if (parts[0].Contains("http"))
+                    if (parts[0].Contains("xn--"))
                     {
-                        if (!Uri.IsWellFormedUriString(parts[0], UriKind.Absolute))
+                        try
                         {
-                            log.Error(string.Format("Bad format for Url {0} at line {1}", parts[0], row));
-                            throw new FormatException(string.Format("Bad format for Url {0} at line {1}", parts[0], row));
+                            u = new Uri(parts[0]);
+                            l = u.Host;
                         }
-                        u = new Uri(parts[0]);
-                        url = u.Scheme + "://" + u.Host;
+                        catch(Exception ex)
+                        {
+                            log.Error("Can't create source url from puny url", ex);
+                        }                         
                     }
+
+                    if (parts[0].Contains("https://"))
+                        l = parts[0].Replace("https://", "");
+                    else if (parts[0].Contains("http://"))
+                        l = parts[0].Replace("http://", "");
                     else
-                    {
-                        url = "http://" + parts[0];
-                        if (!Uri.IsWellFormedUriString(url, UriKind.Absolute))
-                        {
-                            log.Error(string.Format("Bad format for Url {0} at line {1}", parts[0], row));
-                            throw new FormatException(string.Format("Bad format for Url {0} at line {1}", parts[0], row));
-                        }
+                        l = parts[0];
 
-                        u = new Uri(url);
-                        url = u.Scheme + "://" + u.Host;
+                    if (l.Contains("www."))
+                        l = l.Replace("www.", "");
+
+                    if(!Uri.IsWellFormedUriString(l, UriKind.Relative) && !l.Contains(".рф"))
+                    {
+                        log.Error(string.Format("Bad format for Url {0} at line {1}", parts[0], row));
+                        continue;
                     }
 
-                    if(string.IsNullOrEmpty(parts[1]))
+                    l = l.Trim().ToLower();
+
+                    if (l.Contains(".рф") && !Regex.IsMatch(l, @"\S+\.рф$"))
                     {
-                        lang = IdentifyLanguage(url);
+                        log.Error(string.Format("Bad format for Url {0} at line {1}", parts[0], row));
+                        continue;
                     }
 
                     s = new TheSource()
                     {
-                        Url = url,
-                        UrlHash = GetMD5Hash(url),
-                        Lang = (Langs)Enum.Parse(typeof(Langs), parts[1]), 
+                        Url = l,
+                        UrlHash = GetMD5Hash(l),
+                        Lang = string.IsNullOrWhiteSpace(parts[1]) ? Langs.UNDEFINED : (Langs)Enum.Parse(typeof(Langs), parts[1]),
                         TheSourceType = (TheSourceType)Enum.Parse(typeof(TheSourceType), parts[2])
-                    };
+                    };                    
 
                     if (db.TheSources.Where(x => x.UrlHash == s.UrlHash).FirstOrDefault() == null)
                     {

@@ -88,12 +88,27 @@ namespace MMonitorLib.Entities
         /// Last time there was an attempt to update 
         /// the rules of the source AUTOMATICALLY.
         /// </summary>
-        public DateTime? LastTimeAutamaticallRulesUpdatetry { get; set; }
+        public DateTime? LastTimeAutamaticallRulesUpdateTry { get; set; }
+
+        /// <summary>
+        /// Last time there was an attempt to identify encoding.
+        /// </summary>
+        public DateTime? LastTimeAutamaticallEncodingUpdateTry { get; set; }
 
         /// <summary>
         /// Was last attempt of updating the rules success
         /// (if yes than true, no - false, null - were not attempts at all).
         /// </summary>
         public bool? AutomaticalRulesUpdateWasSuccess { get; set; }
+
+        /// <summary>
+        /// Was last attempt to identify encoding success.
+        /// </summary>
+        public bool? AutomaticalEncodingUpdateWasSuccess { get; set; }
+
+        /// <summary>
+        /// The offered new source is approved or not.
+        /// </summary>
+        public bool? IsApproved { get; set; }
     }
 }
