@@ -80,6 +80,10 @@
     <Compile Include="Migrations\201709231406174_added_some_fields_to_source.Designer.cs">
       <DependentUpon>201709231406174_added_some_fields_to_source.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201709231410337_Added_Country_Property_To_Source_And_Its_Table.cs" />
+    <Compile Include="Migrations\201709231410337_Added_Country_Property_To_Source_And_Its_Table.Designer.cs">
+      <DependentUpon>201709231410337_Added_Country_Property_To_Source_And_Its_Table.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MMonitorContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -103,6 +107,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709231406174_added_some_fields_to_source.resx">
       <DependentUpon>201709231406174_added_some_fields_to_source.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201709231410337_Added_Country_Property_To_Source_And_Its_Table.resx">
+      <DependentUpon>201709231410337_Added_Country_Property_To_Source_And_Its_Table.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

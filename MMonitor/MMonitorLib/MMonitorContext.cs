@@ -19,5 +19,6 @@ namespace MMonitorLib
         public DbSet<ThePublication> ThePublications { get; set; }
         public DbSet<TheSource> TheSources { get; set; }
         public DbSet<Cluster> Clusters { get; set; }
+        public DbSet<Country> Countries { get; set; }
     }
 }

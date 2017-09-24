@@ -12,14 +12,41 @@ namespace CentralService
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
-        static void Main()
+        static void Main(string[] args)
         {
             ServiceBase[] ServicesToRun;
+            AppDomain currentDomain = AppDomain.CurrentDomain;
+            currentDomain.UnhandledException += new UnhandledExceptionEventHandler(UnhandeledExeptionHandler);
+
+            if (Environment.UserInteractive)
+            {
+                SourcesProcessingService srv = new SourcesProcessingService();
+                srv.RunToDebug(args);
+                Console.ReadLine();
+            }
+            else
+            {
+                ServicesToRun = new ServiceBase[]
+                {
+                    new SourcesProcessingService()
+                };
+                ServiceBase.Run(ServicesToRun);
+            }
+
             ServicesToRun = new ServiceBase[]
             {
-                new Service1()
+                new SourcesProcessingService()
             };
-            ServiceBase.Run(ServicesToRun);
+            ServiceBase.Run(ServicesToRun);            
+        }
+
+        /// <summary>
+        /// Unhandled exception handler.
+        /// </summary>
+        static void UnhandeledExeptionHandler(object sender, UnhandledExceptionEventArgs args)
+        {
+            Exception ex = (Exception)args.ExceptionObject;
+            SourcesProcessingService.log.Fatal("Service stopped\n" + ex);
         }
     }
 }

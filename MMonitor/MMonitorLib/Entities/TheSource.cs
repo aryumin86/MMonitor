@@ -110,5 +110,10 @@ namespace MMonitorLib.Entities
         /// The offered new source is approved or not.
         /// </summary>
         public bool? IsApproved { get; set; }
+
+        /// <summary>
+        /// Country of Media.
+        /// </summary>
+        public Country Country { get; set; }
     }
 }

@@ -11,6 +11,7 @@
     <AssemblyName>CentralServiceLib</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,6 +33,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,7 +43,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\AbstractSearchEngine.cs" />
+    <Compile Include="Entities\SearchEngineSnippet.cs" />
+    <Compile Include="Entities\SearchEngineSearchResults.cs" />
+    <Compile Include="Helpers\AbstractHelper.cs" />
+    <Compile Include="Helpers\EncodingIdentifier.cs" />
+    <Compile Include="Helpers\ParseRulesIdentifier.cs" />
+    <Compile Include="Helpers\RSSPagesIdentifier.cs" />
+    <Compile Include="Helpers\SourceLanguageIdentifier.cs" />
+    <Compile Include="Helpers\SourceTitleAndDescriptionIdentifier.cs" />
+    <Compile Include="IIUsersService.cs" />
+    <Compile Include="IPageParsingRulesService.cs" />
+    <Compile Include="IUsersService.cs" />
+    <Compile Include="PageParsingRulesService.cs" />
+    <Compile Include="TheSourcesService.cs" />
+    <Compile Include="ITheSourcesService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MMonitorLib\MMonitorLib.csproj">
+      <Project>{8E6F5C53-18E8-4406-8081-7AC8BAE4A165}</Project>
+      <Name>MMonitorLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

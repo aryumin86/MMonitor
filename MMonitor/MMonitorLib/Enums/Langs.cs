@@ -14,6 +14,8 @@ namespace MMonitorLib.Enums
         UNDEFINED = 0,
         RUSSIAN = 1,
         ENGLISH = 2, 
-        DEUTSCH = 3
+        DEUTSCH = 3,
+        FRENCH = 4,
+        SPANISH = 5
     }
 }
