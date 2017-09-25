@@ -19,7 +19,7 @@ namespace CentralService
     {
 
         public static readonly log4net.ILog log = log4net.LogManager.GetLogger
-            (System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+            (System.Reflection.MethodBase.GetCurrentMethod().DeclaringType); 
 
         int numOfSourcesForParallerlProcessing =
             int.Parse(ConfigurationManager.AppSettings["numOfSourcesForParallerlProcessing"]);

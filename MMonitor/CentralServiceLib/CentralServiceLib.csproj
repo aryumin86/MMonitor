@@ -52,12 +52,8 @@
     <Compile Include="Helpers\RSSPagesIdentifier.cs" />
     <Compile Include="Helpers\SourceLanguageIdentifier.cs" />
     <Compile Include="Helpers\SourceTitleAndDescriptionIdentifier.cs" />
-    <Compile Include="IIUsersService.cs" />
-    <Compile Include="IPageParsingRulesService.cs" />
-    <Compile Include="IUsersService.cs" />
-    <Compile Include="PageParsingRulesService.cs" />
-    <Compile Include="TheSourcesService.cs" />
-    <Compile Include="ITheSourcesService.cs" />
+    <Compile Include="IMMonitorService.cs" />
+    <Compile Include="MMonitorService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
