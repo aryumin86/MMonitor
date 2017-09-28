@@ -46,7 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\AbstractSearchEngine.cs" />
+    <Compile Include="Entities\SearchEngine.cs" />
     <Compile Include="Entities\SearchEngineSnippet.cs" />
     <Compile Include="Entities\SearchEngineSearchResults.cs" />
     <Compile Include="Helpers\AbstractHelper.cs" />
@@ -68,6 +68,8 @@
       <Name>MMonitorLib</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Enums\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

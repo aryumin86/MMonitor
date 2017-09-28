@@ -13,7 +13,7 @@ namespace CentralServiceLib.Helpers
     /// <summary>
     /// Identifies the encoding and title of the sourse.
     /// </summary>
-    public class EncodingIdentifier : AbstractHelper
+    public class EncodingAndTitleIdentifier : AbstractHelper
     {
         /// <summary>
         /// Identifing encoding of web page.

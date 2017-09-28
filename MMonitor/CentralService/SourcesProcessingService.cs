@@ -25,7 +25,7 @@ namespace CentralService
 
         private List<AbstractHelper> helpers = new List<AbstractHelper>()
         {
-            new EncodingIdentifier(),
+            new EncodingAndTitleIdentifier(),
             new SourceLanguageIdentifier(),
             new ParseRulesIdentifier(),
             new RSSPagesIdentifier()

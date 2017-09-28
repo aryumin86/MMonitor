@@ -12,7 +12,6 @@ namespace CentralServiceLib.Entities
     /// </summary>
     public class SearchEngineSearchResults
     {
-        public TheSource TheSource { get; set; }
-        public IEnumerable<SearchEngineSnippet> snippets;
+        public List<SearchEngineSnippet> snippets = new List<SearchEngineSnippet>();
     }
 }
