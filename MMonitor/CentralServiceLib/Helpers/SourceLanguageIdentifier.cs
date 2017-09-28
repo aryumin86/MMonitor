@@ -16,9 +16,9 @@ namespace CentralServiceLib.Helpers
         /// Identify the language of the source's pages.
         /// </summary>
         /// <param name="source"></param>
-        public override void Identify(TheSource source)
+        public override void Identify(ref TheSource source)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
     }
 }

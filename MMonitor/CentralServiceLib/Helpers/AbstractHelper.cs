@@ -12,6 +12,6 @@ namespace CentralServiceLib.Helpers
     /// </summary>
     public abstract class AbstractHelper
     {
-        public abstract void Identify(TheSource source);
+        public abstract void Identify(ref TheSource source);
     }
 }

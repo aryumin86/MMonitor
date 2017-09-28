@@ -12,7 +12,7 @@ namespace CentralServiceLib.Helpers
     /// </summary>
     public class RSSPagesIdentifier : AbstractHelper
     {
-        public override void Identify(TheSource source)
+        public override void Identify(ref TheSource source)
         {
 
         }

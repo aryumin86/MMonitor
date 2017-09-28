@@ -16,9 +16,9 @@ namespace CentralServiceLib.Helpers
         /// Identifing the rules of parsing of the source.
         /// </summary>
         /// <param name="source"></param>
-        public override void Identify(TheSource source)
+        public override void Identify(ref TheSource source)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
     }
 }

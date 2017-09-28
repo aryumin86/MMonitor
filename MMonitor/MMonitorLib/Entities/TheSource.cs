@@ -88,12 +88,12 @@ namespace MMonitorLib.Entities
         /// Last time there was an attempt to update 
         /// the rules of the source AUTOMATICALLY.
         /// </summary>
-        public DateTime? LastTimeAutamaticallRulesUpdateTry { get; set; }
+        public DateTime? LastTimeAutomaticalRulesUpdateEffort { get; set; }
 
         /// <summary>
         /// Last time there was an attempt to identify encoding.
         /// </summary>
-        public DateTime? LastTimeAutamaticallEncodingUpdateTry { get; set; }
+        public DateTime? LastTimeAutomaticalEncodingUpdateEffort { get; set; }
 
         /// <summary>
         /// Was last attempt of updating the rules success
@@ -115,5 +115,10 @@ namespace MMonitorLib.Entities
         /// Country of Media.
         /// </summary>
         public Country Country { get; set; }
+
+        /// <summary>
+        /// How many publications are posted per day in this source.
+        /// </summary>
+        public double AverageNumOfPublicationsPerDay { get; set; }
     }
 }

@@ -17,7 +17,6 @@ namespace CentralService
 {
     partial class SourcesProcessingService : ServiceBase
     {
-
         public static readonly log4net.ILog log = log4net.LogManager.GetLogger
             (System.Reflection.MethodBase.GetCurrentMethod().DeclaringType); 
 
@@ -40,6 +39,10 @@ namespace CentralService
         protected override void OnStart(string[] args)
         {
             log.Info("Service started");
+            Thread t = new Thread(new ThreadStart(StartProcessing));
+            t.Start();
+
+            Console.ReadLine();
         }
 
         protected override void OnStop()
@@ -70,15 +73,24 @@ namespace CentralService
                             s.AutomaticalEncodingUpdateWasSuccess == null)
                             .Take(numOfSourcesForParallerlProcessing);
 
-                        log.Info($"{sources.Count()} were taken for processing");
+                        if(sources.Count() == 0)
+                        {
+                            Thread.Sleep(1000 * 60 * 10);
+                            continue;
+                        }
+
+                        log.Info($"{sources.Count()} sources were taken for processing");
 
                         Parallel.ForEach(sources, (s) =>
                         {
-                            log.Info($"Starting processing of {s.Url}");
+                            log.Info($"Starting processing of source {s.Url}");
                             Process(s);
+                            log.Info($"Ended processing of source {s.Url}");
                         });
 
                         log.Info("Sources processing completed");
+                        db.SaveChanges();
+                        log.Info("Sources updated in db");
                     }
                 }
                 catch(Exception ex)
@@ -96,7 +108,7 @@ namespace CentralService
         private void Process(TheSource source)
         {
             foreach (var helper in helpers)
-                helper.Identify(source);
+                helper.Identify(ref source);
         }
     }
 }

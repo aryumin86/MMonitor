@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HtmlAgilityPack, Version=1.5.5.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.5.5\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
@@ -51,13 +54,13 @@
     <Compile Include="Helpers\ParseRulesIdentifier.cs" />
     <Compile Include="Helpers\RSSPagesIdentifier.cs" />
     <Compile Include="Helpers\SourceLanguageIdentifier.cs" />
-    <Compile Include="Helpers\SourceTitleAndDescriptionIdentifier.cs" />
     <Compile Include="IMMonitorService.cs" />
     <Compile Include="MMonitorService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MMonitorLib\MMonitorLib.csproj">
