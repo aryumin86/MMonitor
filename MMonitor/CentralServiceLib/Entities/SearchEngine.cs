@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace CentralServiceLib.Entities
@@ -75,11 +76,15 @@ namespace CentralServiceLib.Entities
                 //we stop searching and begin opening and analizing of the pages at the sources websites.
                 foreach (var q in searchStrings)
                 {
+                    Thread.Sleep(_pause);
+
                     //open page with search results
+ 
 
 
                     //parsing for snippets and urls
 
+                    
 
                     //checking if there are enough results is collected
                     if (results.snippets.Count() >= this._minResultsNumOfSearchRequests)

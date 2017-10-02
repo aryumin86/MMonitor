@@ -27,8 +27,8 @@ namespace CentralService
         {
             new EncodingAndTitleIdentifier(),
             new SourceLanguageIdentifier(),
-            new ParseRulesIdentifier(),
-            new RSSPagesIdentifier()
+            new RSSPagesIdentifier(),
+            new ParseRulesIdentifier()
         };
 
         public SourcesProcessingService()
