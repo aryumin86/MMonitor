@@ -16,33 +16,54 @@ namespace CentralServiceLib.Helpers
     public class ParseRulesIdentifier : AbstractHelper
     {
         /// <summary>
-        /// Identifing the rules of parsing of the source.
+        /// Identifying the rules of parsing of the source.
         /// </summary>
         /// <param name="source"></param>
         public override void Identify(ref TheSource source)
         {
             if(source.TheSourceType == MMonitorLib.Enums.TheSourceType.MASS_MEDIA)
             {
-                try
+                List<string> linksToOpen = new List<string>();
+                if (source.RssPages == null || source.RssPages.Count == 0)
                 {
-                    HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create("http://" + source.Url);
-                    HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-                    string responseString = string.Empty;
+                    //getting links from main page (not a good idea may be...)
 
-                    using (StreamReader stream = new StreamReader(response.GetResponseStream(), Encoding.GetEncoding(source.Enc)))
+                }
+                else
+                {
+                    //getting links from rss feeds
+                    foreach(var rssLink in source.RssPages)
                     {
-                        responseString = stream.ReadToEnd();
+
                     }
-
-                    HtmlDocument doc = new HtmlDocument();
-                    doc.LoadHtml(responseString);
-
-                    
                 }
-                catch (Exception ex)
+            }
+        }
+
+        /// <summary>
+        /// Opens URL page with HttpWebRequest and HtmlAgilityPack.
+        /// </summary>
+        /// <param name="doc"></param>
+        /// <param name="Url"></param>
+        /// <param name="source"></param>
+        private void OpenUrlAndLoadHtml(HtmlDocument doc, string url, TheSource source)
+        {
+            try
+            {
+                HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                string responseString = string.Empty;
+
+                using (StreamReader stream = new StreamReader(response.GetResponseStream(), Encoding.GetEncoding(source.Enc)))
                 {
-                    Console.WriteLine(ex);
+                    responseString = stream.ReadToEnd();
                 }
+                
+                doc.LoadHtml(responseString);
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex);
             }
         }
     }

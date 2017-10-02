@@ -60,7 +60,8 @@ namespace CentralServiceLib.Helpers
                         else
                             resL = l;
 
-                        rssLinks.Add(resL);
+                        if(new Uri(l).Host == new Uri("http://" + source.Url).Host)
+                            rssLinks.Add(resL);
                     }  
                 }
 

@@ -10,6 +10,17 @@ using System.Threading.Tasks;
 namespace MMonitorLib.Entities
 {
     /// <summary>
+    /// How was rules of parsing created or updated last time.
+    /// </summary>
+    public enum ParsingRuleLastUpdateWay
+    {
+        NOT_CREATED_YET = 0,
+        MANUALLY = 1,
+        AUTO_WITH_RSS_PAGE_LINKS = 2,
+        AUTO_WITH_MAIM_PAGE_LINKS = 3
+    }
+
+    /// <summary>
     /// The source (Mass media or Social media).
     /// </summary>
     [Table("TheSources")]
