@@ -53,7 +53,15 @@ namespace CentralServiceLib.Helpers
                 foreach(var l in linkedPages.Union(linkedPages2).Union(linkedPages3))
                 {
                     if ((l.Trim('/').EndsWith("feed") || l.Contains("rss")) && !l.Contains("comment"))
-                        rssLinks.Add(l);
+                    {
+                        string resL = string.Empty;
+                        if (!l.Contains("http"))
+                            resL = "http://" + l;
+                        else
+                            resL = l;
+
+                        rssLinks.Add(resL);
+                    }  
                 }
 
                 source.RssPages = new List<RssPage>();
