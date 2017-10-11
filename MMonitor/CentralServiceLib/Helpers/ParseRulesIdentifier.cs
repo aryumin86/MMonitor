@@ -31,10 +31,55 @@ namespace CentralServiceLib.Helpers
                 }
                 else
                 {
-                    //getting links from rss feeds
-                    foreach(var rssLink in source.RssPages)
-                    {
+                    //documents loaded from rss
+                    var docs = new List<HtmlDocument>();
+                    var xPathes = new List<string>();
+                    var urls = new List<string>();
+                    var pages = new List<HtmlDocument>();
 
+                    //getting links from rss feeds
+                    foreach (var rssLink in source.RssPages)
+                    {
+                        var doc = new HtmlDocument();
+                        docs.Add(doc);
+                        OpenUrlAndLoadHtml(doc, rssLink.Url, source);
+
+                        urls = GetDocUrlsWithinSourceDomain(doc, source);
+                        if (urls.Count < 10)
+                            return;
+
+                        //docs loaded from links at rss page                        
+                        foreach(var u in urls)
+                        {
+                            try
+                            {
+                                HtmlDocument page = new HtmlDocument();
+                                pages.Add(page);
+                                OpenUrlAndLoadHtml(page, u, source);
+                                xPathes.Add(GetLongestTextContainerIdentifier(page));
+                            }
+                            catch(Exception ex)
+                            {
+                                Console.WriteLine(ex);
+                            }
+                        }
+                    }
+
+                    //identifing the most occured xpath
+                    if(xPathes.Count >= 10)
+                    {
+                        source.PageParsingRules.Add(new PageParsingRule()
+                        {
+                            ContentXPath = xPathes.GroupBy(x => x)
+                                .Select(group => new
+                                {
+                                    XPa = group.Key,
+                                    Cou = group.Count()
+                                })
+                                .OrderByDescending(x => x.Cou)
+                                .First()
+                                .XPa
+                        }); 
                     }
                 }
             }
@@ -65,6 +110,35 @@ namespace CentralServiceLib.Helpers
             {
                 Console.WriteLine(ex);
             }
+        }
+
+        /// <summary>
+        /// Get all urls of html page.
+        /// </summary>
+        /// <param name="doc"></param>
+        /// <returns></returns>
+        private List<string> GetDocUrlsWithinSourceDomain(HtmlDocument doc, TheSource source)
+        {
+            var res = new List<string>();
+            res.AddRange(doc.DocumentNode.SelectNodes("//a[@href]")
+                .Select(n => n.GetAttributeValue("href", string.Empty)));
+
+            res = res.Where(u => Uri.IsWellFormedUriString(u, UriKind.Relative) || u.Contains(source.Url)).ToList();
+
+            return res;
+        }
+
+        /// <summary>
+        /// Get div or span with longest text within it.
+        /// p and br tags are excluded from text.
+        /// </summary>
+        /// <param name="doc"></param>
+        /// <returns></returns>
+        private string GetLongestTextContainerIdentifier(HtmlDocument doc)
+        {
+            string res = string.Empty;
+
+            return res;
         }
     }
 }
