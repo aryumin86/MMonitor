@@ -27,5 +27,27 @@ namespace CentralServiceLibTests
 
             Assert.IsTrue(s.RssPages.Count > 0);
         }
+
+        [TestMethod]
+        public void Container_With_Longest_Identifier_Is_Identified()
+        {
+            TheSource s = new TheSource()
+            {
+                Enc = "utf-8",
+                Url = "zonakz.net", 
+                RssPages = new List<RssPage>()
+                {
+                    new RssPage()
+                    {
+                        Url = "https://zonakz.net/feed/"
+                    }
+                }
+            };
+
+            RSSPagesIdentifier iden = new RSSPagesIdentifier();
+            iden.Identify(ref s);
+
+            
+        }
     }
 }

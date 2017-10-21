@@ -5,8 +5,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.ServiceModel.Syndication;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace CentralServiceLib.Helpers
 {
@@ -40,11 +42,7 @@ namespace CentralServiceLib.Helpers
                     //getting links from rss feeds
                     foreach (var rssLink in source.RssPages)
                     {
-                        var doc = new HtmlDocument();
-                        docs.Add(doc);
-                        OpenUrlAndLoadHtml(doc, rssLink.Url, source);
-
-                        urls = GetDocUrlsWithinSourceDomain(doc, source);
+                        urls = GetAllLinksFromRSSFeed(rssLink.Url);
                         if (urls.Count < 10)
                             return;
 
@@ -93,23 +91,65 @@ namespace CentralServiceLib.Helpers
         /// <param name="source"></param>
         private void OpenUrlAndLoadHtml(HtmlDocument doc, string url, TheSource source)
         {
+            string responseString = string.Empty;
+
             try
             {
-                HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
-                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-                string responseString = string.Empty;
-
-                using (StreamReader stream = new StreamReader(response.GetResponseStream(), Encoding.GetEncoding(source.Enc)))
-                {
-                    responseString = stream.ReadToEnd();
-                }
-                
+                responseString = OpenUrlAndGetResponseString(url, source);
                 doc.LoadHtml(responseString);
             }
             catch(Exception ex)
             {
                 Console.WriteLine(ex);
             }
+        }
+
+        private string OpenUrlAndGetResponseString(string url, TheSource source)
+        {
+            string responseString = string.Empty;
+
+            try
+            {
+                HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(url);
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();                
+
+                using (StreamReader stream = new StreamReader(response.GetResponseStream(), Encoding.GetEncoding(source.Enc)))
+                {
+                    responseString = stream.ReadToEnd();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+
+            return responseString;
+        }
+
+        /// <summary>
+        /// Get all links from RSS feed page.
+        /// </summary>
+        /// <param name="raw"></param>
+        /// <param name="source"></param>
+        private List<string> GetAllLinksFromRSSFeed(string url)
+        {
+            List<string> res = new List<string>();
+            try
+            {
+                XmlReader reader = XmlReader.Create(url);
+                SyndicationFeed feed = SyndicationFeed.Load(reader);
+                reader.Close();
+                foreach (SyndicationItem item in feed.Items)
+                {
+                    res.Add(item.Links.First().Uri.AbsoluteUri);
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("Can't parse feed " + ex);
+            }
+
+            return res;
         }
 
         /// <summary>
