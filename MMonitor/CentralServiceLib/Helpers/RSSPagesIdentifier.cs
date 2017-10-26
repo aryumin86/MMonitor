@@ -60,10 +60,20 @@ namespace CentralServiceLib.Helpers
                         else
                             resL = l;
 
-                        if(new Uri(l).Host == new Uri("http://" + source.Url).Host)
+                        if(new Uri(resL).Host == new Uri("http://" + source.Url).Host)
                             rssLinks.Add(resL);
                     }  
                 }
+
+                //Checking links and filling list with new rss links and deleting not valid rss links
+                HashSet<string> temp = new HashSet<string>();
+                foreach(var l in rssLinks)
+                {
+                    var ll = getValidRssPage(l);
+                    foreach (var x in ll)
+                        temp.Add(x);
+                }
+                rssLinks = temp;
 
                 source.RssPages = new List<RssPage>();
                 foreach(var l in rssLinks)
@@ -80,6 +90,16 @@ namespace CentralServiceLib.Helpers
             {
                 Console.WriteLine(ex);
             }
+        }
+
+        /// <summary>
+        /// Checks if a page valid rss page and if not
+        /// it opens links (calls method) on this page and checks if they are valid rss pages
+        /// </summary>
+        /// <returns></returns>
+        private List<string> getValidRssPage(string link)
+        {
+            throw new NotImplementedException();
         }
     }
 }

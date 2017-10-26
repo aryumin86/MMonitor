@@ -75,7 +75,8 @@ namespace CentralServiceLib.Helpers
                                     Cou = group.Count()
                                 })
                                 .OrderByDescending(x => x.Cou)
-                                .First()
+                                .Where(xp => xp.Cou > 1)
+                                .FirstOrDefault()
                                 .XPa
                         }); 
                     }
@@ -137,6 +138,10 @@ namespace CentralServiceLib.Helpers
             try
             {
                 XmlReader reader = XmlReader.Create(url);
+
+                if (!reader.CanResolveEntity)
+                    return res;
+
                 SyndicationFeed feed = SyndicationFeed.Load(reader);
                 reader.Close();
                 foreach (SyndicationItem item in feed.Items)
@@ -181,7 +186,7 @@ namespace CentralServiceLib.Helpers
             //where divs and spanse have id or unique (or first on page) name
             var container1 = doc.DocumentNode.SelectNodes("//div")
                 .Where(d => d.HasAttributes && (d.Attributes["id"] != null))
-                .Where(d => ContainerContainsTextualTags(d) || AtLeastOneOfContainerChildIsPTag(d))
+                .Where(d => ContainerContainsTextualTags(d))
                 .OrderByDescending(d => d.InnerText.Length)
                 .FirstOrDefault();
 
@@ -196,7 +201,7 @@ namespace CentralServiceLib.Helpers
 
             var container2 = doc.DocumentNode.SelectNodes("//span")
                 .Where(d => d.HasAttributes && (d.Attributes["id"] != null))
-                .Where(d => ContainerContainsTextualTags(d) || AtLeastOneOfContainerChildIsPTag(d))
+                .Where(d => ContainerContainsTextualTags(d))
                 .OrderByDescending(d => d.InnerText.Length)
                 .FirstOrDefault();
 
@@ -211,7 +216,7 @@ namespace CentralServiceLib.Helpers
 
             var container3 = doc.DocumentNode.SelectNodes("//div")
                 .Where(d => d.HasAttributes && (d.Attributes["class"] != null))
-                .Where(d => ContainerContainsTextualTags(d) || AtLeastOneOfContainerChildIsPTag(d))
+                .Where(d => ContainerContainsTextualTags(d))
                 .OrderByDescending(d => d.InnerText.Length)
                 .FirstOrDefault();
 
@@ -226,7 +231,7 @@ namespace CentralServiceLib.Helpers
 
             var container4 = doc.DocumentNode.SelectNodes("//span")
                 .Where(d => d.HasAttributes && (d.Attributes["class"] != null))
-                .Where(d => ContainerContainsTextualTags(d) || AtLeastOneOfContainerChildIsPTag(d))
+                .Where(d => ContainerContainsTextualTags(d))
                 .OrderByDescending(d => d.InnerText.Length)
                 .FirstOrDefault();
 
@@ -267,15 +272,8 @@ namespace CentralServiceLib.Helpers
         /// <returns></returns>
         private bool ContainerContainsTextualTags(HtmlNode node)
         {
-            //return node.SelectNodes("p")
-
-            return false;
-        }
-
-
-        private bool AtLeastOneOfContainerChildIsPTag(HtmlNode node)
-        {
-            return node.SelectNodes("//p").Count() > 0;
+            return node.ChildNodes.Any(n => n.ChildNodes.Any(ch => ch.Name == "p")) || 
+                (!node.HasChildNodes && node.InnerHtml.Contains("<br>"));
         }
     }
 }
