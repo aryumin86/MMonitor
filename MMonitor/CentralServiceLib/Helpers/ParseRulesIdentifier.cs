@@ -54,7 +54,7 @@ namespace CentralServiceLib.Helpers
                                 HtmlDocument page = new HtmlDocument();
                                 pages.Add(page);
                                 OpenUrlAndLoadHtml(page, u, source);
-                                xPathes.Add(GetLongestTextContainerIdentifier(page));
+                                xPathes.Add(GetArticleContainerIdentifier(page));
                             }
                             catch(Exception ex)
                             {
@@ -170,15 +170,112 @@ namespace CentralServiceLib.Helpers
 
         /// <summary>
         /// Get div or span with longest text within it.
-        /// p and br tags are excluded from text.
         /// </summary>
         /// <param name="doc"></param>
-        /// <returns></returns>
-        private string GetLongestTextContainerIdentifier(HtmlDocument doc)
+        /// <returns>XPath string for that container</returns>
+        private string GetArticleContainerIdentifier(HtmlDocument doc)
         {
-            string res = string.Empty;
+            Dictionary<string, int> lengths = new Dictionary<string, int>();
 
-            return res;
+            //get all divs and spans with id or class name
+            //where divs and spanse have id or unique (or first on page) name
+            var container1 = doc.DocumentNode.SelectNodes("//div")
+                .Where(d => d.HasAttributes && (d.Attributes["id"] != null))
+                .Where(d => ContainerContainsTextualTags(d) || AtLeastOneOfContainerChildIsPTag(d))
+                .OrderByDescending(d => d.InnerText.Length)
+                .FirstOrDefault();
+
+            if (container1 != null)
+            {
+                lengths.Add
+                    (
+                    string.Format("//div[@id='{0}']", container1.Attributes["id"].Value),
+                    container1.InnerText.Length
+                    );
+            }                
+
+            var container2 = doc.DocumentNode.SelectNodes("//span")
+                .Where(d => d.HasAttributes && (d.Attributes["id"] != null))
+                .Where(d => ContainerContainsTextualTags(d) || AtLeastOneOfContainerChildIsPTag(d))
+                .OrderByDescending(d => d.InnerText.Length)
+                .FirstOrDefault();
+
+            if (container2 != null)
+            {
+                lengths.Add
+                    (
+                    string.Format("//span[@id='{0}']", container1.Attributes["id"].Value),
+                    container2.InnerText.Length
+                    );
+            }
+
+            var container3 = doc.DocumentNode.SelectNodes("//div")
+                .Where(d => d.HasAttributes && (d.Attributes["class"] != null))
+                .Where(d => ContainerContainsTextualTags(d) || AtLeastOneOfContainerChildIsPTag(d))
+                .OrderByDescending(d => d.InnerText.Length)
+                .FirstOrDefault();
+
+            if (container3 != null)
+            {
+                lengths.Add
+                    (
+                    string.Format("//div[@class='{0}']", container1.Attributes["class"].Value),
+                    container3.InnerText.Length
+                    );
+            }
+
+            var container4 = doc.DocumentNode.SelectNodes("//span")
+                .Where(d => d.HasAttributes && (d.Attributes["class"] != null))
+                .Where(d => ContainerContainsTextualTags(d) || AtLeastOneOfContainerChildIsPTag(d))
+                .OrderByDescending(d => d.InnerText.Length)
+                .FirstOrDefault();
+
+            if (container4 != null)
+            {
+                lengths.Add
+                    (
+                    string.Format("//span[@class='{0}']", container1.Attributes["class"].Value),
+                    container4.InnerText.Length
+                    );
+            }
+
+            if (lengths.Count == 0)
+                return string.Empty;
+
+            return lengths
+                .OrderByDescending(x => x.Value)
+                .Select(x => x.Key)
+                .First();
+        }
+
+        /// <summary>
+        /// Counts how many times <br> occures in the container's text
+        /// </summary>
+        /// <param name="innerHtml"></param>
+        /// <returns></returns>
+        private int countNewLineTagsInInnerHtml(string innerText)
+        {
+
+
+            return 0;
+        }
+
+        /// <summary>
+        /// This container is probably the text (there are <p> , <br> etc tags). 
+        /// </summary>
+        /// <param name="node"></param>
+        /// <returns></returns>
+        private bool ContainerContainsTextualTags(HtmlNode node)
+        {
+            //return node.SelectNodes("p")
+
+            return false;
+        }
+
+
+        private bool AtLeastOneOfContainerChildIsPTag(HtmlNode node)
+        {
+            return node.SelectNodes("//p").Count() > 0;
         }
     }
 }
