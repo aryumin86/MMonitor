@@ -131,5 +131,10 @@ namespace MMonitorLib.Entities
         /// How many publications are posted per day in this source.
         /// </summary>
         public double AverageNumOfPublicationsPerDay { get; set; }
+
+        /// <summary>
+        /// This source will be ignored for any helper work.
+        /// </summary>
+        public bool? IgnoreForAutomaticHelpersWork { get; set; }
     }
 }

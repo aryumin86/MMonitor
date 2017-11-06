@@ -92,6 +92,10 @@
     <Compile Include="Migrations\201709281914433_db_updates1.Designer.cs">
       <DependentUpon>201709281914433_db_updates1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711061123314_addedIgnorePropToTheSource.cs" />
+    <Compile Include="Migrations\201711061123314_addedIgnorePropToTheSource.Designer.cs">
+      <DependentUpon>201711061123314_addedIgnorePropToTheSource.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="MMonitorContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -124,6 +128,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201709281914433_db_updates1.resx">
       <DependentUpon>201709281914433_db_updates1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711061123314_addedIgnorePropToTheSource.resx">
+      <DependentUpon>201711061123314_addedIgnorePropToTheSource.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -28,7 +28,7 @@ namespace CentralService
             new EncodingAndTitleIdentifier(),
             new SourceLanguageIdentifier(),
             new RSSPagesIdentifier(),
-            new ParseRulesIdentifier()
+            //new ParseRulesIdentifier()
         };
 
         public SourcesProcessingService()
@@ -70,7 +70,8 @@ namespace CentralService
                         var sources = db.TheSources
                             .Where(s =>
                             s.Enc == null &&
-                            s.AutomaticalEncodingUpdateWasSuccess == null)
+                            s.AutomaticalEncodingUpdateWasSuccess == null &&
+                            s.IgnoreForAutomaticHelpersWork.Value != true)
                             .Take(numOfSourcesForParallerlProcessing);
 
                         if(sources.Count() == 0)
